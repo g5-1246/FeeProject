@@ -1,0 +1,69 @@
+.account-details__heading {
+  font-size: 22px;
+}
+
+.account-details__subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--gray-500);
+}
+
+.account-details__alert {
+  margin-top: 18px;
+  max-width: 640px;
+}
+
+.account-details__card {
+  margin-top: 22px;
+  max-width: 640px;
+}
+
+.account-details__copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 13px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.account-details__copy-btn:hover {
+  background: var(--gray-50);
+}
+
+.account-details__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-details__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.account-details__row:last-child {
+  border-bottom: none;
+}
+
+.account-details__row dt {
+  font-size: 13.5px;
+  color: var(--gray-500);
+}
+
+.account-details__row dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
+  text-align: right;
+}
