@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinCentral Bank - Rudransh</title>
+  <link rel="stylesheet" href="Money and Transaction.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <h1>FinCentral Bank</h1>
+      </div>
+      <div class="user-profile">
+        <span>Rudransh (#4821-9012)</span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="page-header">
+        <div>
+          <h2>Rudransh's Account</h2>
+          <p class="subtitle">Manage account transfers and track payment activity.</p>
+        </div>
+        <button id="open-modal-btn" class="btn btn-primary">+ New Transfer</button>
+      </section>
+
+      <div id="alert-box" class="alert hidden">
+        <span id="alert-message"></span>
+        <button id="close-alert-btn" class="alert-close">&times;</button>
+      </div>
+
+      <section class="overview-grid">
+        <div class="card">
+          <div class="card-title">Available Balance</div>
+          <div class="card-value balance" id="balance-display">₹1,24,450.80</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Total Transactions</div>
+          <div class="card-value" id="total-tx-display">3</div>
+        </div>
+      </section>
+
+      <section class="card table-card">
+        <div class="table-controls">
+          <input 
+            type="text" 
+            id="search-input" 
+            class="form-control search-field" 
+            placeholder="Search by recipient, ID, or category..."
+          />
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="credit">Income</button>
+            <button class="filter-btn" data-filter="debit">Transfers</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Transaction ID</th>
+                <th>Recipient / Source</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="transaction-rows">
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="transfer-modal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Send Money / Process Payment</h3>
+          <button id="close-modal-btn" class="modal-close">&times;</button>
+        </div>
+        <form id="transfer-form">
+          <div class="form-group">
+            <label for="tx-type">Transaction Type</label>
+            <select id="tx-type" class="form-control">
+              <option value="debit">Send Money (Debit)</option>
+              <option value="credit">Deposit Funds (Credit)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tx-recipient">Recipient / Sender Name *</label>
+            <input type="text" id="tx-recipient" class="form-control" placeholder="e.g. Rahul Verma" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-account">Account / Ref Number *</label>
+            <input type="text" id="tx-account" class="form-control" placeholder="e.g. 987654321" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-amount">Amount (₹) *</label>
+            <input type="number" id="tx-amount" class="form-control" step="0.01" min="0.01" placeholder="0.00" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-category">Category</label>
+            <select id="tx-category" class="form-control">
+              <option value="Transfer">Direct Transfer</option>
+              <option value="Bills">Bill Payment</option>
+              <option value="Income">Income / Deposit</option>
+              <option value="Shopping">Shopping & Services</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="cancel-modal-btn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm Transfer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="Money and Transaction.js"></script>
+</body>
+</html>
