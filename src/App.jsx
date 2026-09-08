@@ -9,7 +9,6 @@ import ChangePassword from './pages/ChangePassword.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Profile from './pages/Profile.jsx';
 import AccountDetails from './pages/AccountDetails.jsx';
-import AccountDetails from './pages/AccountDetails.jsx';
 
 import Cards from './pages/Cards.jsx';
 import Statement from './pages/Statement.jsx';
