@@ -1,188 +1,154 @@
-import { useState } from 'react';
-import { CreditCard, Lock, Unlock, Eye, EyeOff } from 'lucide-react';
-import './Cards.css';
+import { useState } from "react";
+import { Eye, EyeOff, Lock, Unlock, CreditCard } from "lucide-react";
+import AuthenticatedLayout from "../components/AuthenticatedLayout";
+import Card from "../components/Card";
+import Button from "../components/Button";
+import "./Cards.css";
 
-const DEFAULT_CARD = {
-  type: 'Debit Card',
-  number: '4582  XXXX  XXXX  7821',
-  holder: 'Harshita Sharma',
-  expiry: '08/29',
-  cvv: '***',
-  status: 'Active',
-};
-
-export default function Cards() {
-  const [card, setCard] = useState(DEFAULT_CARD);
+function Cards() {
   const [showNumber, setShowNumber] = useState(false);
   const [showCvv, setShowCvv] = useState(false);
 
-  function toggleCard() {
-    const newStatus = card.status === 'Active' ? 'Blocked' : 'Active';
+  const [status, setStatus] = useState(
+    localStorage.getItem("fincentral_card_status") || "Active"
+  );
 
-    setCard((prev) => ({
-      ...prev,
-      status: newStatus,
-    }));
+  const cardNumber = "4521 7845 9632 1087";
 
-    localStorage.setItem(
-      'fincentral_card_status',
-      newStatus
-    );
-  }
+  const toggleCard = () => {
+    const newStatus = status === "Active" ? "Blocked" : "Active";
 
-  const storedStatus = localStorage.getItem('fincentral_card_status');
-
-  if (storedStatus && card.status === 'Active' && storedStatus === 'Blocked') {
-    card.status = 'Blocked';
-  }
+    setStatus(newStatus);
+    localStorage.setItem("fincentral_card_status", newStatus);
+  };
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <div>
-          <h1>My Cards</h1>
-          <p>Manage your debit and credit cards</p>
-        </div>
-      </div>
+    <AuthenticatedLayout>
+      <div className="cards-page">
 
-      <div className="cards-grid">
-
-        {/* CARD */}
-        <div className={`bank-card ${card.status === 'Blocked' ? 'bank-card--blocked' : ''}`}>
-          <div className="bank-card__top">
-            <div>
-              <span className="bank-card__bank">
-                FINCENTRAL BANK
-              </span>
-              <span className="bank-card__type">
-                {card.type}
-              </span>
-            </div>
-
-            <CreditCard size={34} />
+        <div className="page-header">
+          <div>
+            <h1>My Cards</h1>
+            <p>Manage your debit and credit cards</p>
           </div>
-
-          <div className="bank-card__number">
-            {showNumber
-              ? '4582 9145 6231 7821'
-              : card.number}
-          </div>
-
-          <div className="bank-card__bottom">
-            <div>
-              <small>CARD HOLDER</small>
-              <strong>{card.holder}</strong>
-            </div>
-
-            <div>
-              <small>VALID THRU</small>
-              <strong>{card.expiry}</strong>
-            </div>
-          </div>
-
-          {card.status === 'Blocked' && (
-            <div className="blocked-overlay">
-              CARD BLOCKED
-            </div>
-          )}
         </div>
 
-        {/* DETAILS */}
-        <div className="card-details card-panel">
-          <div className="panel-title">
-            <h2>Card Details</h2>
+        <div className="cards-grid">
 
-            <span
-              className={
-                card.status === 'Active'
-                  ? 'status active'
-                  : 'status blocked'
-              }
-            >
-              {card.status}
-            </span>
+          {/* Debit Card */}
+          <div className="bank-card">
+
+            <div className="card-top">
+              <span>FINCENTRAL BANK</span>
+              <CreditCard size={32} />
+            </div>
+
+            <div className="chip"></div>
+
+            <div className="card-number">
+              {showNumber ? cardNumber : "4521 •••• •••• 1087"}
+            </div>
+
+            <div className="card-bottom">
+              <div>
+                <small>CARD HOLDER</small>
+                <strong>MAYANK GARG</strong>
+              </div>
+
+              <div>
+                <small>VALID THRU</small>
+                <strong>09/29</strong>
+              </div>
+            </div>
+
           </div>
 
-          <div className="details-list">
+          {/* Card Details */}
+          <Card>
+            <div className="card-details-header">
+              <h2>Debit Card</h2>
 
-            <div className="detail-row">
-              <span>Card Type</span>
-              <strong>{card.type}</strong>
+              <span className={`status ${status.toLowerCase()}`}>
+                {status}
+              </span>
             </div>
 
             <div className="detail-row">
               <span>Card Number</span>
+
               <strong>
-                {showNumber
-                  ? '4582 9145 6231 7821'
-                  : 'XXXX XXXX XXXX 7821'}
+                {showNumber ? cardNumber : "4521 •••• •••• 1087"}
 
                 <button
                   className="icon-btn"
                   onClick={() => setShowNumber(!showNumber)}
                 >
-                  {showNumber
-                    ? <EyeOff size={17} />
-                    : <Eye size={17} />}
+                  {showNumber ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </strong>
             </div>
 
             <div className="detail-row">
+              <span>Card Type</span>
+              <strong>Debit Card</strong>
+            </div>
+
+            <div className="detail-row">
+              <span>Expiry Date</span>
+              <strong>09/29</strong>
+            </div>
+
+            <div className="detail-row">
               <span>CVV</span>
+
               <strong>
-                {showCvv ? '428' : '***'}
+                {showCvv ? "421" : "•••"}
 
                 <button
                   className="icon-btn"
                   onClick={() => setShowCvv(!showCvv)}
                 >
-                  {showCvv
-                    ? <EyeOff size={17} />
-                    : <Eye size={17} />}
+                  {showCvv ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </strong>
             </div>
 
-            <div className="detail-row">
-              <span>Expiry Date</span>
-              <strong>{card.expiry}</strong>
-            </div>
+            <Button
+              onClick={toggleCard}
+              variant={status === "Active" ? "secondary" : "primary"}
+            >
+              {status === "Active" ? (
+                <>
+                  <Lock size={18} />
+                  Block Card
+                </>
+              ) : (
+                <>
+                  <Unlock size={18} />
+                  Unblock Card
+                </>
+              )}
+            </Button>
 
-          </div>
+          </Card>
 
-          <button
-            className={
-              card.status === 'Active'
-                ? 'card-action block'
-                : 'card-action unblock'
-            }
-            onClick={toggleCard}
-          >
-            {card.status === 'Active'
-              ? <Lock size={18} />
-              : <Unlock size={18} />}
-
-            {card.status === 'Active'
-              ? 'Block Card'
-              : 'Unblock Card'}
-          </button>
         </div>
-      </div>
 
-      {/* SECURITY INFO */}
-      <div className="security-box">
-        <Lock size={22} />
+        {/* Card Status */}
+        <Card className="security-card">
+          <h2>Card Security</h2>
 
-        <div>
-          <h3>Card Security</h3>
           <p>
-            You can block your card instantly if you notice
-            suspicious activity. Unblocking restores normal
-            card usage.
+            Your card is currently{" "}
+            <strong>{status.toLowerCase()}</strong>.
+            You can block your card temporarily if you notice
+            suspicious activity.
           </p>
-        </div>
+        </Card>
+
       </div>
-    </div>
+    </AuthenticatedLayout>
   );
 }
+
+export default Cards;

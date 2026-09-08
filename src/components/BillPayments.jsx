@@ -1,232 +1,190 @@
-import { useState } from 'react';
+import { useState } from "react";
+
 import {
   Zap,
   Smartphone,
   Wifi,
-  Receipt,
-  CheckCircle
-} from 'lucide-react';
-import './BillPayments.css';
+  Receipt
+} from "lucide-react";
 
-const services = [
-  {
-    id: 'electricity',
-    title: 'Electricity Bill',
-    icon: Zap,
-  },
-  {
-    id: 'mobile',
-    title: 'Mobile Recharge',
-    icon: Smartphone,
-  },
-  {
-    id: 'internet',
-    title: 'Internet',
-    icon: Wifi,
-  },
-  {
-    id: 'other',
-    title: 'Other Utilities',
-    icon: Receipt,
-  },
-];
+import AuthenticatedLayout from "../components/AuthenticatedLayout";
+import Card from "../components/Card";
+import Button from "../components/Button";
 
-export default function BillPayments() {
-  const [selectedService, setSelectedService] =
-    useState('electricity');
+import "./BillPayments.css";
 
-  const [formData, setFormData] = useState({
-    number: '',
-    amount: '',
-  });
+function BillPayments() {
+
+  const [service, setService] = useState("Electricity");
+  const [number, setNumber] = useState("");
+  const [amount, setAmount] = useState("");
+  const [message, setMessage] = useState("");
 
   const [history, setHistory] = useState(() => {
-    const saved = localStorage.getItem(
-      'fincentral_bill_history'
+    return JSON.parse(
+      localStorage.getItem("fincentral_bill_history") || "[]"
     );
-
-    return saved
-      ? JSON.parse(saved)
-      : [];
   });
 
-  const [success, setSuccess] = useState(false);
+  const services = [
+    {
+      name: "Electricity",
+      icon: <Zap size={30} />,
+      description: "Pay your electricity bill"
+    },
+    {
+      name: "Mobile Recharge",
+      icon: <Smartphone size={30} />,
+      description: "Recharge your mobile"
+    },
+    {
+      name: "Internet",
+      icon: <Wifi size={30} />,
+      description: "Pay internet bill"
+    },
+    {
+      name: "Other Utilities",
+      icon: <Receipt size={30} />,
+      description: "Pay other utility bills"
+    }
+  ];
 
-  function handleChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  }
+  const handlePayment = (e) => {
 
-  function makePayment(e) {
     e.preventDefault();
 
-    if (!formData.number || !formData.amount) {
-      alert('Please fill all fields.');
+    if (!number || !amount) {
+      setMessage("Please enter all details.");
       return;
     }
 
-    const service = services.find(
-      (s) => s.id === selectedService
-    );
-
     const payment = {
       id: Date.now(),
-      service: service.title,
-      number: formData.number,
-      amount: Number(formData.amount),
-      date: new Date().toISOString().slice(0, 10),
-      status: 'Successful',
+      service,
+      number,
+      amount: Number(amount),
+      date: new Date().toLocaleDateString(),
+      status: "Successful"
     };
 
     const updatedHistory = [
       payment,
-      ...history,
+      ...history
     ];
 
     setHistory(updatedHistory);
 
     localStorage.setItem(
-      'fincentral_bill_history',
+      "fincentral_bill_history",
       JSON.stringify(updatedHistory)
     );
 
-    setFormData({
-      number: '',
-      amount: '',
-    });
+    setNumber("");
+    setAmount("");
 
-    setSuccess(true);
-
-    setTimeout(() => {
-      setSuccess(false);
-    }, 3000);
-  }
+    setMessage(
+      `${service} payment of ₹${amount} was successful.`
+    );
+  };
 
   return (
-    <div className="bill-page">
+    <AuthenticatedLayout>
 
-      <div className="bill-header">
-        <div>
+      <div className="bill-page">
+
+        <div className="page-header">
           <h1>Bill Payments</h1>
-          <p>Pay your bills quickly and securely</p>
+          <p>Pay your bills and recharge services</p>
         </div>
-      </div>
 
-      {/* SERVICES */}
-      <div className="service-grid">
+        {/* SERVICES */}
 
-        {services.map((service) => {
+        <div className="service-grid">
 
-          const Icon = service.icon;
+          {services.map((item) => (
 
-          return (
-            <button
-              key={service.id}
-              className={
-                selectedService === service.id
-                  ? 'service-card selected'
-                  : 'service-card'
-              }
-              onClick={() =>
-                setSelectedService(service.id)
-              }
+            <div
+              key={item.name}
+              className={`service-card ${
+                service === item.name ? "selected" : ""
+              }`}
+              onClick={() => {
+                setService(item.name);
+                setMessage("");
+              }}
             >
 
               <div className="service-icon">
-                <Icon size={24} />
+                {item.icon}
               </div>
 
-              <strong>{service.title}</strong>
+              <h3>{item.name}</h3>
 
-              <span>
-                Pay securely
-              </span>
+              <p>{item.description}</p>
 
-            </button>
-          );
-        })}
+            </div>
 
-      </div>
+          ))}
 
-      {/* PAYMENT */}
-      <div className="payment-layout">
+        </div>
 
-        <div className="payment-card">
+        {/* PAYMENT FORM */}
 
-          <h2>
-            {services.find(
-              (s) => s.id === selectedService
-            )?.title}
-          </h2>
+        <Card className="payment-card">
 
-          <p>
-            Enter the details below to make your payment.
-          </p>
+          <h2>Pay {service}</h2>
 
-          <form onSubmit={makePayment}>
+          <form onSubmit={handlePayment}>
 
             <label>
-              {selectedService === 'mobile'
-                ? 'Mobile Number'
-                : selectedService === 'electricity'
-                  ? 'Consumer Number'
-                  : selectedService === 'internet'
-                    ? 'Account Number'
-                    : 'Reference Number'}
+              {service === "Mobile Recharge"
+                ? "Mobile Number"
+                : "Consumer / Account Number"}
             </label>
 
             <input
               type="text"
-              name="number"
-              value={formData.number}
-              onChange={handleChange}
               placeholder="Enter number"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
             />
 
             <label>Amount</label>
 
             <input
               type="number"
-              name="amount"
-              value={formData.amount}
-              onChange={handleChange}
-              placeholder="₹ Enter amount"
+              placeholder="Enter amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
             />
 
-            <button
-              type="submit"
-              className="pay-btn"
-            >
-              Pay Now
-            </button>
+            <Button type="submit">
+              Pay ₹{amount || "0"}
+            </Button>
 
           </form>
 
-          {success && (
-            <div className="success-message">
-              <CheckCircle size={18} />
-              Payment successful!
+          {message && (
+            <div className="payment-message">
+              {message}
             </div>
           )}
 
-        </div>
+        </Card>
 
-        {/* HISTORY */}
-        <div className="history-card">
+        {/* PAYMENT HISTORY */}
 
-          <div className="history-header">
+        <Card className="history-card">
+
+          <div className="history-heading">
             <h2>Payment History</h2>
-            <span>{history.length} payments</span>
           </div>
 
           {history.length === 0 ? (
 
-            <div className="history-empty">
-              <Receipt size={35} />
-              <p>No payments yet.</p>
-            </div>
+            <p className="empty-history">
+              No bill payments yet.
+            </p>
 
           ) : (
 
@@ -239,33 +197,33 @@ export default function BillPayments() {
                   key={payment.id}
                 >
 
-                  <div className="history-icon">
-                    <Receipt size={18} />
-                  </div>
-
-                  <div className="history-info">
+                  <div>
 
                     <strong>
                       {payment.service}
                     </strong>
 
                     <small>
-                      {payment.number} • {payment.date}
+                      {payment.number}
                     </small>
 
                   </div>
 
-                  <div className="history-amount">
+                  <div>
 
                     <strong>
-                      ₹{payment.amount.toLocaleString('en-IN')}
+                      ₹{payment.amount.toLocaleString()}
                     </strong>
 
                     <small>
-                      {payment.status}
+                      {payment.date}
                     </small>
 
                   </div>
+
+                  <span className="success">
+                    {payment.status}
+                  </span>
 
                 </div>
 
@@ -275,10 +233,12 @@ export default function BillPayments() {
 
           )}
 
-        </div>
+        </Card>
 
       </div>
 
-    </div>
+    </AuthenticatedLayout>
   );
 }
+
+export default BillPayments;
