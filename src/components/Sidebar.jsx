@@ -22,6 +22,11 @@ const NAV_ITEMS = [
   { label: 'Payments', to: '/dashboard', icon: FileText, active: false },
   { label: 'Settings', to: '/profile', icon: Settings, active: false },
   { label: 'Change Password', to: '/change-password', icon: KeyRound, active: true },
+  { label: 'Cards', to: '/cards', icon: CreditCard, active: true },
+
+{ label: 'Bank Statement', to: '/statement', icon: FileText, active: true },
+
+{ label: 'Bill Payments', to: '/bill-payments', icon: Receipt, active: true },
 ];
 
 export default function Sidebar({ isOpen, onClose, onLogoutClick }) {

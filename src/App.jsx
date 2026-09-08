@@ -9,7 +9,11 @@ import ChangePassword from './pages/ChangePassword.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Profile from './pages/Profile.jsx';
 import AccountDetails from './pages/AccountDetails.jsx';
+import AccountDetails from './pages/AccountDetails.jsx';
 
+import Cards from './pages/Cards.jsx';
+import Statement from './pages/Statement.jsx';
+import BillPayments from './pages/BillPayments.jsx';
 import './App.css';
 
 export default function App() {
@@ -53,6 +57,32 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/cards"
+  element={
+    <ProtectedRoute>
+      <Cards />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/statement"
+  element={
+    <ProtectedRoute>
+      <Statement />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/bill-payments"
+  element={
+    <ProtectedRoute>
+      <BillPayments />
+    </ProtectedRoute>
+  }
+/>
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
