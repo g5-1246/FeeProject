@@ -1,0 +1,46 @@
+.pin-input__label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+}
+
+.pin-input__boxes {
+  display: flex;
+  gap: 10px;
+}
+
+.pin-input__box {
+  width: 48px;
+  height: 52px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--gray-900);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pin-input__box:focus {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px var(--blue-100);
+}
+
+.pin-input__boxes--error .pin-input__box {
+  border-color: var(--red-600);
+}
+
+.pin-input__box:disabled {
+  background: var(--gray-50);
+  opacity: 0.7;
+}
+
+@media (max-width: 380px) {
+  .pin-input__box {
+    width: 42px;
+    height: 46px;
+  }
+}

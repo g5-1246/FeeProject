@@ -1,0 +1,70 @@
+/* Shared styles for Pay & Transfer, Deposits and related feature pages */
+.banking-page { display: flex; flex-direction: column; gap: 20px; max-width: 1000px; }
+.banking-narrow { max-width: 720px; }
+
+.banking-list { list-style: none; margin: 0; padding: 0; }
+.banking-list__item {
+  display: flex; align-items: center; gap: 14px; padding: 14px 22px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.banking-list__item:last-child { border-bottom: none; }
+.banking-list__avatar {
+  width: 38px; height: 38px; border-radius: 12px; background: var(--blue-100); color: var(--blue-600);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;
+}
+.banking-list__main { flex: 1; min-width: 0; }
+.banking-list__title { margin: 0; font-size: 14px; font-weight: 600; color: var(--gray-900); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.banking-list__sub { margin: 2px 0 0; font-size: 12.5px; color: var(--gray-500); }
+.banking-list__amount { font-size: 14px; font-weight: 600; text-align: right; }
+
+.icon-btn {
+  width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--gray-200); background: var(--white);
+  color: var(--gray-600); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.icon-btn:hover { background: var(--red-100); color: var(--red-600); border-color: #f0c4c8; }
+
+.payee-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.payee-chip {
+  padding: 7px 12px; border-radius: 20px; border: 1px solid var(--gray-300); background: var(--white);
+  font-size: 13px; font-weight: 600; color: var(--gray-600); cursor: pointer;
+}
+.payee-chip:hover { border-color: var(--blue-500); color: var(--blue-600); }
+.payee-chip--on { background: var(--blue-100); border-color: var(--blue-500); color: var(--blue-600); }
+
+.plan-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.plan-table th, .plan-table td { padding: 12px 22px; text-align: left; border-bottom: 1px solid var(--gray-100); }
+.plan-table th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-500); background: var(--gray-50); }
+.plan-table tr:last-child td { border-bottom: none; }
+.demo-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #fdf3e0; color: #96631a; margin-left: 8px; }
+
+.result-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.result-box { padding: 14px; border-radius: var(--radius-md); background: var(--gray-50); border: 1px solid var(--gray-200); }
+.result-box--main { background: linear-gradient(135deg, var(--navy-800), var(--blue-600)); color: var(--white); border-color: transparent; }
+.result-box span { font-size: 12px; opacity: 0.8; display: block; }
+.result-box strong { display: block; margin-top: 6px; font-size: 17px; font-family: var(--font-mono); overflow-wrap: anywhere; }
+
+.review-box { border: 1px dashed var(--gray-300); border-radius: var(--radius-md); padding: 4px 16px; margin-top: 18px; }
+
+.tab-switch { display: inline-flex; background: var(--gray-100); border-radius: var(--radius-sm); padding: 3px; gap: 3px; }
+.tab-switch button { border: none; background: transparent; padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 700; color: var(--gray-600); cursor: pointer; }
+.tab-switch button[aria-pressed='true'] { background: var(--white); color: var(--blue-600); box-shadow: var(--shadow-card); }
+
+.coming-soon { text-align: center; padding: 40px 20px; }
+.coming-soon h2 { margin: 12px 0 6px; }
+.coming-soon p { margin: 0 auto 18px; max-width: 420px; color: var(--gray-500); font-size: 14px; }
+
+@media (max-width: 640px) {
+  .result-grid { grid-template-columns: 1fr; }
+  .banking-list__item { padding: 12px 16px; }
+  .plan-table th, .plan-table td { padding: 10px 14px; }
+}
+
+/* Shared with Dashboard so sub-pages render the same when loaded directly */
+.status-pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 700; }
+.status-pill--pending { background: #fdf3e0; color: #96631a; }
+.status-pill--completed { background: var(--green-100); color: var(--green-600); }
+.summary-list { margin: 0; }
+.summary-list__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--gray-100); }
+.summary-list__row:last-child { border-bottom: none; }
+.summary-list__row dt { font-size: 13px; color: var(--gray-500); }
+.summary-list__row dd { margin: 0; font-size: 13.5px; font-weight: 600; color: var(--gray-900); text-align: right; }

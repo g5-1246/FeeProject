@@ -1,0 +1,108 @@
+.settings-page {
+  padding: 32px;
+  color: #f5f5f5;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.settings-header {
+  margin-bottom: 32px;
+}
+
+.settings-eyebrow {
+  color: #c6a86a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.settings-header h1 {
+  font-size: 32px;
+  margin: 8px 0;
+}
+
+.settings-header > p:last-child,
+.settings-section-subtitle {
+  color: #a7afbf;
+  font-size: 14px;
+}
+
+.settings-section {
+  background: #111c30;
+  border: 1px solid #26344b;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.settings-section h2 {
+  font-size: 19px;
+  margin: 0 0 8px;
+}
+
+.settings-section-subtitle {
+  margin-bottom: 20px;
+}
+
+.settings-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 12px;
+  color: inherit;
+  text-decoration: none;
+  border-top: 1px solid #26344b;
+  transition: background 0.2s ease;
+}
+
+.settings-option[href]:hover {
+  background: #192740;
+}
+
+.settings-option-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #c6a86a;
+  background: #263247;
+  border-radius: 10px;
+}
+
+.settings-option-content {
+  flex: 1;
+}
+
+.settings-option-content h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+
+.settings-option-content p {
+  font-size: 13px;
+  color: #a7afbf;
+  margin: 0;
+}
+
+.settings-chevron {
+  color: #c6a86a;
+}
+
+.settings-option-static {
+  cursor: default;
+}
+
+@media (max-width: 600px) {
+  .settings-page {
+    padding: 20px 14px;
+  }
+
+  .settings-section {
+    padding: 16px;
+  }
+
+  .settings-header h1 {
+    font-size: 27px;
+  }
+}

@@ -1,0 +1,18 @@
+/* App.css intentionally stays minimal — most layout lives in each page's
+   own stylesheet and in AuthenticatedLayout.css, keeping styles scoped
+   and easy to locate. */
+
+.page-fade {
+  animation: page-fade-in 0.2s ease;
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
