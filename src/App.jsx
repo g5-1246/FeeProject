@@ -28,6 +28,7 @@ import DepositCalculator from './pages/DepositCalculator.jsx';
 import MyDeposits from './pages/MyDeposits.jsx';
 import CurrencyConverterPage from './pages/CurrencyConverterPage.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
+import FeatureHub from './pages/FeatureHub.jsx';
 import './App.css';
 
 export default function App() {
@@ -246,6 +247,9 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/loans/:feature" element={<ProtectedRoute><FeatureHub section="loans" /></ProtectedRoute>} />
+        <Route path="/lifestyle/:feature" element={<ProtectedRoute><FeatureHub section="lifestyle" /></ProtectedRoute>} />
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
