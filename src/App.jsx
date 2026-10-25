@@ -1,4 +1,3 @@
-
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -29,10 +28,6 @@ import DepositCalculator from './pages/DepositCalculator.jsx';
 import MyDeposits from './pages/MyDeposits.jsx';
 import CurrencyConverterPage from './pages/CurrencyConverterPage.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
-
-// Loans and Lifestyle
-import LoansLifestyle from './pages/LoansLifestyle.jsx';
-
 import './App.css';
 
 export default function App() {
@@ -52,7 +47,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/dashboard"
           element={
@@ -61,7 +55,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/profile"
           element={
@@ -70,7 +63,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/account-details"
           element={
@@ -79,42 +71,41 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/transactions"
+  element={
+    <ProtectedRoute>
+      <Transactions />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
-          path="/transactions"
-          element={
-            <ProtectedRoute>
-              <Transactions />
-            </ProtectedRoute>
-          }
-        />
+  path="/cards"
+  element={
+    <ProtectedRoute>
+      <Cards />
+    </ProtectedRoute>
+  }
+/>
 
-        <Route
-          path="/cards"
-          element={
-            <ProtectedRoute>
-              <Cards />
-            </ProtectedRoute>
-          }
-        />
+<Route
+  path="/statement"
+  element={
+    <ProtectedRoute>
+      <Statement />
+    </ProtectedRoute>
+  }
+/>
 
-        <Route
-          path="/statement"
-          element={
-            <ProtectedRoute>
-              <Statement />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/bill-payments"
-          element={
-            <ProtectedRoute>
-              <BillPayments />
-            </ProtectedRoute>
-          }
-        />
+<Route
+  path="/bill-payments"
+  element={
+    <ProtectedRoute>
+      <BillPayments />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/notifications"
@@ -134,15 +125,14 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <SettingsPage />
-            </ProtectedRoute>
-          }
+      <Route
+      path="/settings"
+      element={
+        <ProtectedRoute>
+          <SettingsPage />
+        </ProtectedRoute>
+      }
         />
-
         <Route
           path="/admin"
           element={
@@ -160,7 +150,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/pay-transfer/send"
           element={
@@ -169,7 +158,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/pay-transfer/quick-pay"
           element={
@@ -178,7 +166,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/beneficiaries"
           element={
@@ -187,7 +174,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/beneficiaries/add"
           element={
@@ -196,7 +182,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/transfer-history"
           element={
@@ -205,7 +190,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/deposits"
           element={
@@ -214,7 +198,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/deposits/fd"
           element={
@@ -223,7 +206,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/deposits/rd"
           element={
@@ -232,7 +214,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/deposits/my"
           element={
@@ -241,7 +222,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/deposits/calculator"
           element={
@@ -250,7 +230,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/currency-converter"
           element={
@@ -259,65 +238,16 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/payments"
           element={
             <ProtectedRoute>
-              <ComingSoon
-                title="Payments"
-                subtitle="Scheduled and recurring payments."
-                description="Scheduling and recurring payments aren’t available yet. You can pay utility bills now from Bill Payments."
-                linkTo="/bill-payments"
-                linkLabel="Go to Bill Payments"
-              />
+              <ComingSoon title="Payments" subtitle="Scheduled and recurring payments." description="Scheduling and recurring payments aren’t available yet. You can pay utility bills now from Bill Payments." linkTo="/bill-payments" linkLabel="Go to Bill Payments" />
             </ProtectedRoute>
           }
         />
 
-        {/* Loans routes */}
-        <Route
-          path="/loans"
-          element={
-            <ProtectedRoute>
-              <LoansLifestyle section="loans" />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/loans/:feature"
-          element={
-            <ProtectedRoute>
-              <LoansLifestyle section="loans" />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Lifestyle routes */}
-        <Route
-          path="/lifestyle"
-          element={
-            <ProtectedRoute>
-              <LoansLifestyle section="lifestyle" />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/lifestyle/:feature"
-          element={
-            <ProtectedRoute>
-              <LoansLifestyle section="lifestyle" />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Redirect unknown routes */}
-        <Route
-          path="*"
-          element={<Navigate to="/login" replace />}
-        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </AuthProvider>
   );
