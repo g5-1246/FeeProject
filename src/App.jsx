@@ -29,7 +29,7 @@ import DepositCalculator from './pages/DepositCalculator.jsx';
 import MyDeposits from './pages/MyDeposits.jsx';
 import CurrencyConverterPage from './pages/CurrencyConverterPage.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
-import LoansLifestyle from './pages/LoansLifestyle.jsx';
+
 
 import './App.css';
 
