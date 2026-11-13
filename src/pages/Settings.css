@@ -1,0 +1,79 @@
+
+.settings-saved {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  margin-bottom: 20px;
+  background: #e8f7ee;
+  color: #157347;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.settings-saved button {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.settings-switch {
+  position: relative;
+  display: inline-flex;
+  width: 46px;
+  height: 25px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.settings-switch input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.settings-switch span {
+  position: absolute;
+  inset: 0;
+  background: #64748b;
+  border-radius: 30px;
+  transition: .2s;
+}
+
+.settings-switch span::before {
+  content: "";
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  left: 3px;
+  top: 3px;
+  border-radius: 50%;
+  background: white;
+  transition: .2s;
+}
+
+.settings-switch input:checked + span {
+  background: #2e63d1;
+}
+
+.settings-switch input:checked + span::before {
+  transform: translateX(21px);
+}
+
+.settings-switch input:focus-visible + span {
+  outline: 3px solid #93b4f5;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .settings-page {
+    padding: 20px 14px;
+  }
+
+  .settings-section {
+    padding: 16px;
+  }
+}
